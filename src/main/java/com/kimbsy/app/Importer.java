@@ -100,6 +100,8 @@ public class Importer
     File inputDirectory = new File("data/input");
     File[] inputFiles   = inputDirectory.listFiles();
 
+    int importedCount = 0;
+
     if (inputFiles.length > 0) {
 
       Arrays.sort(inputFiles);
@@ -108,17 +110,19 @@ public class Importer
 
         File inputFile = inputFiles[i];
 
-        if (inputFile.isFile()) {
-          System.out.println("File: " + inputFile.getName());
-
+        if (inputFile.isFile() && !inputFile.getName().equals("README.md")) {
           this.setInputFile(inputFile).importFromFile();
+          importedCount++;
         }
       }
 
-      System.out.println("Removing input files...");
-      this.removeFiles(inputFiles);
-    } else {
-      System.out.println("No input files found.");
+      if (importedCount > 0) {
+        System.out.println(importedCount + " input file(s) imported.");
+        System.out.println("Removing input file(s)...");
+        this.removeFiles(inputFiles);
+      } else {
+        System.out.println("No input files found.");
+      }
     }
   }
 
@@ -279,10 +283,12 @@ public class Importer
   protected void removeFiles(File[] files)
   {
     for (int i =0; i < files.length; i++) {
-      if (files[i].delete()) {
-        System.out.println(files[i] + " successfully deleted.");
-      } else {
-        System.out.println("[ERROR] failed to delete file: " + files[i]);
+      if (!files[i].getName().equals("README.md")) {
+        if (files[i].delete()) {
+          System.out.println(files[i] + " successfully deleted.");
+        } else {
+          System.out.println("[ERROR] failed to delete file: " + files[i]);
+        }
       }
     }
   }

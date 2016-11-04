@@ -1,0 +1,5 @@
+# Importer parameter config file.
+#
+# Should be copied to config.properties before running.
+
+ip_addr=YOUR_ELASTICSEARCH_SERVER_IP
