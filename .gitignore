@@ -1,3 +1,4 @@
 resources/config/config.properties
-data/*
 target/*
+data/*
+!data/input/README.md
