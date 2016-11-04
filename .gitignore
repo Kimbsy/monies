@@ -1,0 +1,3 @@
+resources/config/config.parameters
+data/*
+target/*
